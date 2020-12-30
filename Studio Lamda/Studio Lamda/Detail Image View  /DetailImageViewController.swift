@@ -1,5 +1,5 @@
 //
-//  MessagingViewController.swift
+//  DetailImageViewController.swift
 //  Studio Lamda
 //
 //  Created by Antonio Flores on 12/29/20.
@@ -7,10 +7,11 @@
 
 import UIKit
 
-class MessagingViewController: UIViewController {
+class DetailImageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .red
         // Do any additional setup after loading the view.
     }
     
