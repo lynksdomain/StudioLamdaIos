@@ -11,7 +11,7 @@ import MapKit
 class DetailPageViewController: UIViewController,MKMapViewDelegate {
     
     
-    let detailView = DetialImageUIView()
+//    let detailView = DetialImageUIView()
     
     var markerPosition : CGPoint!
     
@@ -44,17 +44,6 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        detailView.isHidden = true
-        
-        if traitCollection.forceTouchCapability == .available {
-            UIContextMenuInteraction.self
-        }
-        
-        if( traitCollection.forceTouchCapability == .available){
-            
-            registerForPreviewing(with: self, sourceView: view)
-            
-        }
         
 //        navigationController?.navigationBar.prefersLargeTitles = true
         let icon = UIImage(systemName: "message")
@@ -160,29 +149,15 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
     
     
     func detailPageLayout(){
-        scrollView.addSubview(detailView)
-        
-        detailView.translatesAutoresizingMaskIntoConstraints = false
-        
-        detailView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor, constant: 0).isActive = true
-        detailView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor, constant: 0).isActive = true
-        
-        detailView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 10).isActive = true
-        detailView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -10).isActive = true
-        detailView.heightAnchor.constraint(equalTo: self.containerView.heightAnchor, multiplier:  0.5).isActive = true
-        
-        
-        
+
         mapViewLayoutContraints()
         projectTitleLabelLayoutContraints()
         stackLayoutContraints()
-//        projectCapacityLabelLayoutContraints()
-//        estimateTimeLayoutContraints()
+//      projectCapacityLabelLayoutContraints()
+//      estimateTimeLayoutContraints()
         galleryLayoutContraints()
         collectionViewLayoutContraints()
-        
-        
-        
+
     }
        
     lazy var collectionView: UICollectionView = {
@@ -194,6 +169,7 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
         collectionView.backgroundColor = .white
         return collectionView
     }()
+    
     
     lazy var projectTitleLabel: UILabel = {
         var label = UILabel()
@@ -407,40 +383,10 @@ extension DetailPageViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let destVC = storyboard.instantiateViewController(withIdentifier: "DetailVC")
-        //                    (destVC as? DetailImageViewController)?.imgData = self.images[indexPath.item]
-        //        destVC.preferredContentSize = CGSize(width: 100, height: 200)
-        //        destVC.modalPresentationStyle = .overCurrentContext
-        //        navigationController?.isModalInPresentation = true
-        //        navigationController?.present(destVC, animated: true, completion: nil)
-        detailView.isHidden = false
-        
-        //        self.present(destVC, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let imageVC = storyboard.instantiateViewController(withIdentifier: "ImageViewController")
+            self.navigationController?.pushViewController(imageVC, animated: true)
     }
 }
 
 
-extension DetailPageViewController: UIViewControllerPreviewingDelegate {
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        let selectedIndexPath = collectionView.indexPathForItem(at: location)
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let destVC = storyboard.instantiateViewController(withIdentifier: "PreviewVC")
-        destVC.preferredContentSize = CGSize.init(width: view.frame.size.width, height: view.frame.size.height)
-        //            peekedData = images[selectedIndexPath?.row ?? 0]
-        //            (destVC as? PreviewVC)?.imgData = peekedData
-        navigationController?.pushViewController(destVC, animated: true)
-        return destVC
-    }
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let destVC = storyboard.instantiateViewController(withIdentifier: "DetailVC")
-        //                (destVC as? DetailVC)?.imgData = peekedData
-        show(destVC, sender: self)
-    }
-    
-    
-    
-}
