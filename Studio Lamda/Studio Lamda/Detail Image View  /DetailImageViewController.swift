@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AVKit
+import AVFoundation
 
 class DetailImageViewController: UIViewController {
 
@@ -17,6 +19,12 @@ class DetailImageViewController: UIViewController {
     
     let cellScale: CGFloat = 0.6
     
+    var player = AVPlayer()
+    
+    var playerViewController = AVPlayerViewController()
+    
+    
+    let clientArray = clientModel.clientModelArray
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +80,7 @@ class DetailImageViewController: UIViewController {
 extension DetailImageViewController: UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageArray.count
+        return clientArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -83,13 +91,28 @@ extension DetailImageViewController: UICollectionViewDataSource,UICollectionView
 //        imageView.contentMode = .scaleToFill
 
 //        cell.contentView.addSubview(imageView)
-        let imagearray = imageArray[indexPath.row]
-        cell.imageView.image = imagearray
+        let imagearray = clientArray[indexPath.row]
+        
+        if imagearray.isVideo {
+        cell.imageView.image = UIImage(named: imagearray.imageName)
+        cell.playImageView.image = UIImage(named: "playButton")
+
+        } else {
+        cell.imageView.image = UIImage(named: imagearray.imageName)
+        }
             
-        cell.backgroundColor = .green
-        //        cell.backgroundColor = UIColor.green
         return cell
     }
+    
+    
+    func playVideo(name: String) {
+        let videoPath = Bundle.main.path(forResource: name, ofType: "mp4")
+        let videoPathUrl = URL(fileURLWithPath: videoPath!)
+        player = AVPlayer(url: videoPathUrl)
+        playerViewController.player = player
+        present(playerViewController, animated: true, completion: nil)
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -118,10 +141,14 @@ extension DetailImageViewController: UICollectionViewDataSource,UICollectionView
         
         targetContentOffset.pointee = offset
     }
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let imageVC = storyboard.instantiateViewController(withIdentifier: "ImageViewController")
-//            self.navigationController?.pushViewController(imageVC, animated: true)
-//    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let client = clientArray[indexPath.row]
+        if client.isVideo {
+            playVideo(name: client.videoName)
+        }
+    }
     
 }

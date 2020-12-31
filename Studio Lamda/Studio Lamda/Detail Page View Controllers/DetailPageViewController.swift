@@ -19,6 +19,8 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
     
     let mapView = MKMapView()
     
+    let clientArray = clientModel.clientModelArray
+    
     let imageArray = [UIImage.init(named: "photo1"),
                       UIImage.init(named: "photo2"),
                       UIImage.init(named: "photo3"),

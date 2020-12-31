@@ -11,8 +11,8 @@ class ImageCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        imageViewConstraints()
         playImageViewConstraints()
+        imageViewConstraints()
     }
     
     lazy var imageView: UIImageView = {
@@ -23,7 +23,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
     
     lazy var playImageView: UIImageView = {
         var imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -32,8 +32,8 @@ class ImageCollectionViewCell: UICollectionViewCell {
         playImageView.translatesAutoresizingMaskIntoConstraints = false
         playImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
         playImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
-        playImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5).isActive = true
-        playImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5).isActive = true
+        playImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2).isActive = true
+        playImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.2).isActive = true
     }
     
     
@@ -45,14 +45,6 @@ class ImageCollectionViewCell: UICollectionViewCell {
         imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
     }
-//    func collectionViewConstraints(){
-//        addSubview(imageView)
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
-//        imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
-//        imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
-//        imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
-//    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
