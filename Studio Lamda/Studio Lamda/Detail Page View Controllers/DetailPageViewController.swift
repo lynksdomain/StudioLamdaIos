@@ -386,8 +386,9 @@ extension DetailPageViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let imageVC = storyboard.instantiateViewController(withIdentifier: "ImageViewController")
-            self.navigationController?.pushViewController(imageVC, animated: true)
+        let imageVC = storyboard.instantiateViewController(withIdentifier: "ImageViewController") as! DetailImageViewController
+        imageVC.toIndexPath = indexPath
+        self.navigationController?.pushViewController(imageVC, animated: true)
     }
 }
 

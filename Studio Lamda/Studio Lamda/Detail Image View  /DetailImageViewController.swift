@@ -18,34 +18,36 @@ class DetailImageViewController: UIViewController {
                       UIImage.init(named: "photo5")]
     
     let cellScale: CGFloat = 0.6
+        
+    var toIndexPath: IndexPath? = nil
     
     var player = AVPlayer()
     
     var playerViewController = AVPlayerViewController()
-    
     
     let clientArray = clientModel.clientModelArray
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let screenSize = UIScreen.main.bounds.size
-        let cellWidth = floor(screenSize.width * cellScale)
-        let cellHeight = floor(screenSize.height * cellScale)
-        let insetX = (view.bounds.width - cellWidth) / 2.0
-        let insetY = (view.bounds.height - cellHeight) / 2.0
         
-        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+//        let screenSize = UIScreen.main.bounds.size
+//        let cellWidth = floor(screenSize.width * cellScale)
+//        let cellHeight = floor(screenSize.height * cellScale)
+//        let insetX = (view.bounds.width - cellWidth) / 2.0
+//        let insetY = (view.bounds.height - cellHeight) / 2.0
+//
+//        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+//
+//        layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
+//        collectionView.contentInset = UIEdgeInsets(top: insetY, left: insetX, bottom: insetY, right: insetX)
         
-        layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
-        collectionView.contentInset = UIEdgeInsets(top: insetY, left: insetX, bottom: insetY, right: insetX)
-        
-
         
 //        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Photos"
         collectionViewConstraints()
     }
+
     
 
     lazy var collectionView: UICollectionView = {
@@ -118,7 +120,7 @@ extension DetailImageViewController: UICollectionViewDataSource,UICollectionView
         
 //        let width = collectionView.frame.width / 3 - 1
         
-        return CGSize(width: 250, height: 380)
+        return CGSize(width: 400, height: 400)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -132,23 +134,30 @@ extension DetailImageViewController: UICollectionViewDataSource,UICollectionView
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         let cellWidthIncludingSpcaing = layout.itemSize.width + layout.minimumLineSpacing
-        
+
         var offset = targetContentOffset.pointee
         let index = (offset.x+scrollView.contentInset.left)/cellWidthIncludingSpcaing
         let roundedIndex = round(index)
-        
+
         offset = CGPoint(x: roundedIndex * cellWidthIncludingSpcaing - scrollView.contentInset.left, y: scrollView.contentInset.top)
-        
+
         targetContentOffset.pointee = offset
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let client = clientArray[indexPath.row]
         if client.isVideo {
             playVideo(name: client.videoName)
+        } else {
+//            let imageInfo = CSImageInfo
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+//        guard let indexpath = toIndexPath else {return }
+//        collectionView.scrollToItem(at: indexpath, at: .centeredHorizontally, animated: true)
     }
     
 }
