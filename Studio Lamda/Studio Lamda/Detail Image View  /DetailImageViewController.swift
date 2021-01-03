@@ -11,11 +11,6 @@ import AVFoundation
 
 class DetailImageViewController: UIViewController {
 
-    let imageArray = [UIImage.init(named: "photo1"),
-                      UIImage.init(named: "photo2"),
-                      UIImage.init(named: "photo3"),
-                      UIImage.init(named: "photo4"),
-                      UIImage.init(named: "photo5")]
     
     let cellScale: CGFloat = 0.6
         
@@ -47,13 +42,19 @@ class DetailImageViewController: UIViewController {
         navigationItem.title = "Photos"
         collectionViewConstraints()
     }
-
     
+    override func viewDidLayoutSubviews() {
+        guard let indexpath = toIndexPath else {return }
+//        collectionView.selectItem(at: indexpath, animated: false, scrollPosition: .centeredHorizontally)
+
+        collectionView.scrollToItem(at:indexpath, at: .right, animated: true)
+    }
+
 
     lazy var collectionView: UICollectionView = {
         var flowlayout = UICollectionViewFlowLayout()
         var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowlayout)
-        collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "ImageCollectionViewCell")
+        collectionView.register(detailImageCollectionViewCell.self, forCellWithReuseIdentifier: "ImageCollectionViewCell")
         collectionView.delegate = self
         collectionView.dataSource = self
         flowlayout.scrollDirection = .horizontal
@@ -87,18 +88,13 @@ extension DetailImageViewController: UICollectionViewDataSource,UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
-        
-//        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: cell.frame.width, height: cell.frame.height))
-//        imageView.contentMode = .scaleToFill
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as? detailImageCollectionViewCell else { return UICollectionViewCell() }
 
-//        cell.contentView.addSubview(imageView)
         let imagearray = clientArray[indexPath.row]
         
         if imagearray.isVideo {
         cell.imageView.image = UIImage(named: imagearray.imageName)
         cell.playImageView.image = UIImage(named: "playButton")
-
         } else {
         cell.imageView.image = UIImage(named: imagearray.imageName)
         }
@@ -117,9 +113,7 @@ extension DetailImageViewController: UICollectionViewDataSource,UICollectionView
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-//        let width = collectionView.frame.width / 3 - 1
-        
+                
         return CGSize(width: 400, height: 400)
     }
     
@@ -150,14 +144,10 @@ extension DetailImageViewController: UICollectionViewDataSource,UICollectionView
         if client.isVideo {
             playVideo(name: client.videoName)
         } else {
-//            let imageInfo = CSImageInfo
+            
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-//        guard let indexpath = toIndexPath else {return }
-//        collectionView.scrollToItem(at: indexpath, at: .centeredHorizontally, animated: true)
-    }
+
     
 }

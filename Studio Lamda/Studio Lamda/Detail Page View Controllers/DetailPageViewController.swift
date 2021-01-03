@@ -18,13 +18,8 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate, SegmentedPro
     
     let mapView = MKMapView()
     
-    let clientArray = clientModel.clientModelArray
-    
-    let imageArray = [UIImage.init(named: "photo1"),
-                      UIImage.init(named: "photo2"),
-                      UIImage.init(named: "photo3"),
-                      UIImage.init(named: "photo4"),
-                      UIImage.init(named: "photo5")]
+    let imageArray = clientModel.clientModelArray
+
     
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     lazy var scrollView: UIScrollView = {
@@ -181,7 +176,7 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate, SegmentedPro
     lazy var collectionView: UICollectionView = {
         var flowlayout = UICollectionViewFlowLayout()
         var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowlayout)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "collectionCell")
+        collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "collectionCell")
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .white
@@ -391,12 +386,9 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate, SegmentedPro
     
     func buttonStackLayoutContraints() {
         containerView.addSubview(buttonStackView)
-        
         buttonStackView.addArrangedSubview(appointmentButton)
         buttonStackView.addArrangedSubview(detailButton)
-
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
-        
         buttonStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20).isActive = true
         buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
         buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
@@ -404,9 +396,7 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate, SegmentedPro
     
     func galleryLayoutContraints() {
         containerView.addSubview(gallerytitleLabel)
-        
         gallerytitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         gallerytitleLabel.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 30).isActive = true
         gallerytitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         gallerytitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
@@ -425,19 +415,23 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate, SegmentedPro
 
 extension DetailPageViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
-    {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imageArray.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-    {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath as IndexPath)
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: cell.frame.width, height: cell.frame.height))
-        cell.contentView.addSubview(imageView)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as? ImageCollectionViewCell else {return UICollectionViewCell()}
+      
         let imagearray = imageArray[indexPath.row]
-        imageView.image = imagearray
-        //        cell.backgroundColor = UIColor.green
+        
+        if imagearray.isVideo {
+            
+        cell.imageView.image = UIImage(named: imagearray.imageName)
+        cell.playImageView.image = UIImage(named: "playButton")
+
+        } else {
+        cell.imageView.image = UIImage(named: imagearray.imageName)
+        }
         return cell
     }
     
