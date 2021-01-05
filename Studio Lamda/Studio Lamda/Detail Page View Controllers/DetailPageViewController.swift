@@ -297,9 +297,8 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate, SegmentedPro
     lazy var buttonStackView: UIStackView = {
         var stack = UIStackView()
         stack.axis = NSLayoutConstraint.Axis.horizontal
-        stack.spacing = 100
+        stack.spacing = 20
         stack.distribution = .fillEqually
-
         return stack
     }()
     
