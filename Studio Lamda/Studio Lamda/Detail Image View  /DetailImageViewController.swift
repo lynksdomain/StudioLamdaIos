@@ -22,25 +22,16 @@ class DetailImageViewController: UIViewController {
     
     let clientArray = clientModel.clientModelArray
     
+    var imageForVideosArray:Set<Int> = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-//        let screenSize = UIScreen.main.bounds.size
-//        let cellWidth = floor(screenSize.width * cellScale)
-//        let cellHeight = floor(screenSize.height * cellScale)
-//        let insetX = (view.bounds.width - cellWidth) / 2.0
-//        let insetY = (view.bounds.height - cellHeight) / 2.0
-//
-//        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-//
-//        layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
-//        collectionView.contentInset = UIEdgeInsets(top: insetY, left: insetX, bottom: insetY, right: insetX)
-        
         
 //        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Photos"
         collectionViewConstraints()
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchAction(sender:)))
+               collectionView.addGestureRecognizer(pinchGesture)
     }
     
     override func viewDidLayoutSubviews() {
@@ -50,6 +41,15 @@ class DetailImageViewController: UIViewController {
         collectionView.scrollToItem(at:indexpath, at: .right, animated: true)
     }
 
+    
+    @objc func pinchAction(sender:UIPinchGestureRecognizer){
+           var scaleValue: CGFloat!
+           if sender.state == .changed || sender.state == .began {
+            collectionView.isScrollEnabled = false
+           } else {
+            collectionView.isScrollEnabled = true
+           }
+       }
 
     lazy var collectionView: UICollectionView = {
         var flowlayout = UICollectionViewFlowLayout()
@@ -60,22 +60,18 @@ class DetailImageViewController: UIViewController {
         flowlayout.scrollDirection = .horizontal
         flowlayout.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 20)
         flowlayout.invalidateLayout()
-        collectionView.backgroundColor = .white
+        collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
+        collectionView.backgroundColor = .black
         return collectionView
     }()
     
     func collectionViewConstraints() {
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-//        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
-        collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
-        collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
-        collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
-        collectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1).isActive = true
-
-//        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
-//        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 16).isActive = true
-//        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 40).isActive = true
+        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
     }
 
 }
@@ -89,15 +85,26 @@ extension DetailImageViewController: UICollectionViewDataSource,UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as? detailImageCollectionViewCell else { return UICollectionViewCell() }
+        
+        cell.tag = indexPath.row
 
         let imagearray = clientArray[indexPath.row]
         
         if imagearray.isVideo {
-        cell.imageView.image = UIImage(named: imagearray.imageName)
-        cell.playImageView.image = UIImage(named: "playButton")
-        } else {
-        cell.imageView.image = UIImage(named: imagearray.imageName)
+            imageForVideosArray.insert(cell.tag)
         }
+        
+        cell.imageView.image = UIImage(named: imagearray.imageName)
+
+
+        if imageForVideosArray.contains(indexPath.row){
+            cell.playImageView.image = UIImage(named: "playButton")
+            cell.playImageView.isHidden = false
+            } else {
+                cell.playImageView.isHidden = true
+            }
+        
+        print(imageForVideosArray)
             
         return cell
     }
@@ -125,17 +132,14 @@ extension DetailImageViewController: UICollectionViewDataSource,UICollectionView
         return 10
     }
     
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        let cellWidthIncludingSpcaing = layout.itemSize.width + layout.minimumLineSpacing
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        self.collectionView.scrollToNearestVisibleCollectionViewCell()
+    }
 
-        var offset = targetContentOffset.pointee
-        let index = (offset.x+scrollView.contentInset.left)/cellWidthIncludingSpcaing
-        let roundedIndex = round(index)
-
-        offset = CGPoint(x: roundedIndex * cellWidthIncludingSpcaing - scrollView.contentInset.left, y: scrollView.contentInset.top)
-
-        targetContentOffset.pointee = offset
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            self.collectionView.scrollToNearestVisibleCollectionViewCell()
+        }
     }
     
     
@@ -146,8 +150,35 @@ extension DetailImageViewController: UICollectionViewDataSource,UICollectionView
         } else {
             
         }
+
     }
     
 
     
+}
+
+
+
+extension UICollectionView {
+    func scrollToNearestVisibleCollectionViewCell() {
+        self.decelerationRate = UIScrollView.DecelerationRate.fast
+        let visibleCenterPositionOfScrollView = Float(self.contentOffset.x + (self.bounds.size.width / 2))
+        var closestCellIndex = -1
+        var closestDistance: Float = .greatestFiniteMagnitude
+        for i in 0..<self.visibleCells.count {
+            let cell = self.visibleCells[i]
+            let cellWidth = cell.bounds.size.width
+            let cellCenter = Float(cell.frame.origin.x + cellWidth / 2)
+
+            // Now calculate closest cell
+            let distance: Float = fabsf(visibleCenterPositionOfScrollView - cellCenter)
+            if distance < closestDistance {
+                closestDistance = distance
+                closestCellIndex = self.indexPath(for: cell)!.row
+            }
+        }
+        if closestCellIndex != -1 {
+            self.scrollToItem(at: IndexPath(row: closestCellIndex, section: 0), at: .centeredHorizontally, animated: true)
+        }
+    }
 }
