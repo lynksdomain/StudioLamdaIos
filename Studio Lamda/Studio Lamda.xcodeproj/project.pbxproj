@@ -26,6 +26,8 @@
 		7FD085452596AFD0001DF6A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FD085432596AFD0001DF6A8 /* LaunchScreen.storyboard */; };
 		7FD085502596AFD0001DF6A8 /* Studio_LamdaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0854F2596AFD0001DF6A8 /* Studio_LamdaTests.swift */; };
 		7FD0855B2596AFD0001DF6A8 /* Studio_LamdaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0855A2596AFD0001DF6A8 /* Studio_LamdaUITests.swift */; };
+		7FDCBEFA25AAC74F00A01485 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDCBEF925AAC74F00A01485 /* SignUpView.swift */; };
+		7FDCBF0225AB051700A01485 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDCBF0125AB051700A01485 /* LoginView.swift */; };
 		7FED24E625AA7CEB000C6C34 /* LoginStartScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FED24E525AA7CEB000C6C34 /* LoginStartScreenViewController.swift */; };
 		7FED24EB25AA7D01000C6C34 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FED24EA25AA7D01000C6C34 /* LoginViewController.swift */; };
 		7FED24F025AA7D15000C6C34 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FED24EF25AA7D15000C6C34 /* SignUpViewController.swift */; };
@@ -75,6 +77,8 @@
 		7FD085562596AFD0001DF6A8 /* Studio LamdaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Studio LamdaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FD0855A2596AFD0001DF6A8 /* Studio_LamdaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Studio_LamdaUITests.swift; sourceTree = "<group>"; };
 		7FD0855C2596AFD0001DF6A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7FDCBEF925AAC74F00A01485 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		7FDCBF0125AB051700A01485 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		7FED24E525AA7CEB000C6C34 /* LoginStartScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStartScreenViewController.swift; sourceTree = "<group>"; };
 		7FED24EA25AA7D01000C6C34 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7FED24EF25AA7D15000C6C34 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -219,9 +223,27 @@
 			path = "Studio LamdaUITests";
 			sourceTree = "<group>";
 		};
+		7FDCBEF725AAC1DB00A01485 /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				7FDCBF0125AB051700A01485 /* LoginView.swift */,
+			);
+			path = LoginView;
+			sourceTree = "<group>";
+		};
+		7FDCBEF825AAC1F800A01485 /* SignupView */ = {
+			isa = PBXGroup;
+			children = (
+				7FDCBEF925AAC74F00A01485 /* SignUpView.swift */,
+			);
+			path = SignupView;
+			sourceTree = "<group>";
+		};
 		7FED24E425AA7CCD000C6C34 /* Login Items */ = {
 			isa = PBXGroup;
 			children = (
+				7FDCBEF825AAC1F800A01485 /* SignupView */,
+				7FDCBEF725AAC1DB00A01485 /* LoginView */,
 				7FED24F525AA7D34000C6C34 /* LoginStartUIVew */,
 				7FED24F425AA7D1C000C6C34 /* ViewControllers */,
 			);
@@ -389,8 +411,10 @@
 				7F1FB66E259BE3DE005AEA68 /* DetialImageUIView.swift in Sources */,
 				7FED24F025AA7D15000C6C34 /* SignUpViewController.swift in Sources */,
 				7F1FB665259BDC9D005AEA68 /* DetailImageViewController.swift in Sources */,
+				7FDCBF0225AB051700A01485 /* LoginView.swift in Sources */,
 				7FED24F725AA7D71000C6C34 /* LoginStartScreenView.swift in Sources */,
 				7F1FB659259BBBEC005AEA68 /* MessagingViewController.swift in Sources */,
+				7FDCBEFA25AAC74F00A01485 /* SignUpView.swift in Sources */,
 				7F1F5C2E2597CA3100752B9F /* DetailPageBusinessInfo.swift in Sources */,
 				7FED24EB25AA7D01000C6C34 /* LoginViewController.swift in Sources */,
 				7F251C5A259E75EA000C124A /* clientModel.swift in Sources */,

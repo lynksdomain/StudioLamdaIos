@@ -13,6 +13,7 @@ class LoginStartScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = true
         loginStartViewConstraints()
         loginStartView.LoginButton.addTarget(self, action: #selector(segueToLogin), for: .touchUpInside)
         loginStartView.signUpButton.addTarget(self, action: #selector(segueToSignUp), for: .touchUpInside)

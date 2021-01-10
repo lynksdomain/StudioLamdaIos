@@ -9,21 +9,31 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    let loginView = LoginView()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
-        view.backgroundColor = .red
+        signUpViewConstraints()
+        LoginView.loginButton.addTarget(self, action: #selector(loginSegue), for: .touchUpInside)
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func loginSegue(){
+        dismiss(animated: true, completion: nil)
+        var signupVC = SignUpViewController()
+        navigationController?.pushViewController(signupVC, animated: true)
     }
-    */
+
+    func signUpViewConstraints() {
+        view.addSubview(loginView)
+        loginView.translatesAutoresizingMaskIntoConstraints = false
+        loginView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        loginView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        loginView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        loginView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    }
+  
 
 }
