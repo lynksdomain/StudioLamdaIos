@@ -54,12 +54,12 @@ class LoginStartScreenView: UIView {
     }
     
     func loginConstraints(){
-        addSubview(LoginButton)
-        LoginButton.translatesAutoresizingMaskIntoConstraints = false
-        LoginButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.06).isActive = true
-        LoginButton.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3).isActive = true
-        LoginButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        LoginButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        addSubview(loginButton)
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        loginButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.06).isActive = true
+        loginButton.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3).isActive = true
+        loginButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        loginButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
     func signUpButtonConstraints(){
@@ -68,7 +68,7 @@ class LoginStartScreenView: UIView {
         signUpButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.055).isActive = true
         signUpButton.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3).isActive = true
         signUpButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        signUpButton.topAnchor.constraint(equalTo: LoginButton.bottomAnchor, constant: 40).isActive = true
+        signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 40).isActive = true
 
     }
     
@@ -99,7 +99,7 @@ class LoginStartScreenView: UIView {
     }()
     
     
-    lazy var LoginButton: UIButton = {
+    lazy var loginButton: UIButton = {
         var button = UIButton()
         button.setTitle("LOGIN", for: .normal)
         button.setTitleColor(.white, for: .normal)

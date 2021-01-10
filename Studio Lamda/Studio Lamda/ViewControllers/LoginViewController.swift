@@ -14,15 +14,24 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
         signUpViewConstraints()
-        LoginView.loginButton.addTarget(self, action: #selector(loginSegue), for: .touchUpInside)
+        loginView.alreadyHaveButton.addTarget(self, action: #selector(loginSegue), for: .touchUpInside)
+        loginView.loginButton.addTarget(self, action: #selector(segueToMainScreen), for: .touchUpInside)
     }
     
+    
+    @objc func segueToMainScreen() {
+        dismiss(animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainScreen = storyboard.instantiateViewController(withIdentifier: "mainScreen")
+        self.navigationController?.pushViewController(mainScreen, animated: true)
+    }
 
     @objc func loginSegue(){
         dismiss(animated: true, completion: nil)
-        var signupVC = SignUpViewController()
+        let signupVC = SignUpViewController()
         navigationController?.pushViewController(signupVC, animated: true)
     }
 

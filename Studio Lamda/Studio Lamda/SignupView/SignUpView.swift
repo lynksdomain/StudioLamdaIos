@@ -110,7 +110,7 @@ class SignUpView: UIView {
 lazy var signupLabel: UILabel = {
     var label = UILabel()
     label.text = "Sign Up!"
-    label.textColor = .black
+    label.textColor = .blue
     label.textAlignment = .left
     label.font = UIFont(descriptor: UIFontDescriptor(name: "HelveticaNeue-Medium", size: 8), size: 18)
     label.font = UIFont.boldSystemFont(ofSize: 28)
@@ -178,7 +178,7 @@ lazy var alreadyHaveLabel: UILabel = {
     let alreadyHave = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor : UIColor.black]
     let signup = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor : UIColor.systemBlue]
     let alreadyHaveString = NSMutableAttributedString(string:"Already Have an account?", attributes:alreadyHave)
-    let signupString = NSMutableAttributedString(string:" Sign Up", attributes:signup)
+    let signupString = NSMutableAttributedString(string:" Login", attributes:signup)
     alreadyHaveString.append(signupString)
     label.attributedText = alreadyHaveString
     label.tintColor = .black

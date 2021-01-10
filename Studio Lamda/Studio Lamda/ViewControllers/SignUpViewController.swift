@@ -17,6 +17,7 @@ class SignUpViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         signUpViewConstraints()
         signUpView.alreadyHaveButton.addTarget(self, action: #selector(loginSegue), for: .touchUpInside)
+        signUpView.createButton.addTarget(self, action: #selector(segueToMainScreen), for: .touchUpInside)
     }
     
     @objc func loginSegue(){
@@ -25,6 +26,13 @@ class SignUpViewController: UIViewController {
         navigationController?.pushViewController(loginVC, animated: true)
     }
 
+    @objc func segueToMainScreen() {
+        dismiss(animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainScreen = storyboard.instantiateViewController(withIdentifier: "mainScreen")
+        self.navigationController?.pushViewController(mainScreen, animated: true)
+    }
+    
     func signUpViewConstraints() {
         view.addSubview(signUpView)
         signUpView.translatesAutoresizingMaskIntoConstraints = false
