@@ -125,6 +125,7 @@ lazy var passwordTF: UITextField = {
     textField.placeholder = "   Password"
     textField.leftIcon(imageName: "lock.fill", tintColor: .black)
     textField.setUnderLine(color: .black)
+    textField.isSecureTextEntry = true
 
     return textField
 }()

@@ -132,8 +132,12 @@ lazy var welcomeLabel: UILabel = {
 lazy var emailTF: UITextField = {
     var textField = UITextField()
     textField.placeholder = "   Email"
+    textField.isEnabled = true
     textField.leftIcon(imageName: "envelope", tintColor: .black)
     textField.setUnderLine(color: .black)
+    textField.autocapitalizationType = .none
+    textField.returnKeyType = .continue
+    textField.autocorrectionType = .no
 
     return textField
 }()
@@ -143,6 +147,9 @@ lazy var nameTF: UITextField = {
     textField.placeholder = "   Name"
     textField.setUnderLine(color: .black)
     textField.leftIcon(imageName: "person", tintColor: .black)
+    textField.autocapitalizationType = .none
+    textField.returnKeyType = .continue
+    textField.autocorrectionType = .no
     return textField
 }()
 
@@ -151,6 +158,10 @@ lazy var passwordTF: UITextField = {
     textField.placeholder = "   Password"
     textField.leftIcon(imageName: "lock.fill", tintColor: .black)
     textField.setUnderLine(color: .black)
+    textField.autocapitalizationType = .none
+    textField.returnKeyType = .continue
+    textField.autocorrectionType = .no
+    textField.isSecureTextEntry = true
 
     return textField
 }()
@@ -160,7 +171,10 @@ lazy var confirmPasswordTF: UITextField = {
     textField.placeholder = "   Confirm Password"
     textField.leftIcon(imageName: "lock", tintColor: .black)
     textField.setUnderLine(color: .black)
-
+    textField.isSecureTextEntry = true
+    textField.autocapitalizationType = .none
+    textField.returnKeyType = .done
+    textField.autocorrectionType = .no
     return textField
 }()
 
@@ -209,14 +223,14 @@ extension UITextField {
         self.layer.shadowRadius = 0.0
         self.borderStyle = .none
     }
-    
+
     func leftIcon(imageName:String,tintColor:UIColor){
         self.leftView = UIImageView(image:UIImage(systemName: imageName))
         self.leftView?.tintColor = tintColor
         self.leftView?.frame = CGRect(x: 30, y: 30, width: 20 , height:20)
         self.leftViewMode = .always
     }
-    
+
     func rightIcon(imageName:String,tintColor:UIColor){
         self.rightView = UIImageView(image:UIImage(systemName: imageName))
         self.rightView?.tintColor = tintColor

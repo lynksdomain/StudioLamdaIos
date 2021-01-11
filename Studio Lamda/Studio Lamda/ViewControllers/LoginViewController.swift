@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
 
@@ -23,6 +24,21 @@ class LoginViewController: UIViewController {
     
     
     @objc func segueToMainScreen() {
+        
+        guard let email = loginView.emailTF.text, let password = loginView.passwordTF.text, !email.isEmpty, !password.isEmpty, password.count >= 6 else {
+            print("Error logging in user")
+            return
+        }
+        
+        Firebase.Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            guard let result = user, error == nil else {
+                print("Error can't find user")
+                return
+            }
+            
+            let user = result.user
+        }
+        
         dismiss(animated: true, completion: nil)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainScreen = storyboard.instantiateViewController(withIdentifier: "mainScreen")

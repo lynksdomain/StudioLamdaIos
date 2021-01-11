@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3968A56CFBBA3C1436285C40 /* Pods_Studio_Lamda_Studio_LamdaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 913EB6FF2C137A8777FE3927 /* Pods_Studio_Lamda_Studio_LamdaUITests.framework */; };
+		7E78368FC949680B55FC3320 /* Pods_Studio_Lamda.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF19785CBD2E9E05A6118128 /* Pods_Studio_Lamda.framework */; };
 		7F1F5C2E2597CA3100752B9F /* DetailPageBusinessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1F5C2D2597CA3100752B9F /* DetailPageBusinessInfo.swift */; };
 		7F1FB659259BBBEC005AEA68 /* MessagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1FB658259BBBEC005AEA68 /* MessagingViewController.swift */; };
 		7F1FB665259BDC9D005AEA68 /* DetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1FB664259BDC9D005AEA68 /* DetailImageViewController.swift */; };
@@ -28,10 +30,12 @@
 		7FD0855B2596AFD0001DF6A8 /* Studio_LamdaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0855A2596AFD0001DF6A8 /* Studio_LamdaUITests.swift */; };
 		7FDCBEFA25AAC74F00A01485 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDCBEF925AAC74F00A01485 /* SignUpView.swift */; };
 		7FDCBF0225AB051700A01485 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDCBF0125AB051700A01485 /* LoginView.swift */; };
+		7FDCBF0725AB8E5C00A01485 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FDCBF0625AB8E5C00A01485 /* GoogleService-Info.plist */; };
 		7FED24E625AA7CEB000C6C34 /* LoginStartScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FED24E525AA7CEB000C6C34 /* LoginStartScreenViewController.swift */; };
 		7FED24EB25AA7D01000C6C34 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FED24EA25AA7D01000C6C34 /* LoginViewController.swift */; };
 		7FED24F025AA7D15000C6C34 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FED24EF25AA7D15000C6C34 /* SignUpViewController.swift */; };
 		7FED24F725AA7D71000C6C34 /* LoginStartScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FED24F625AA7D71000C6C34 /* LoginStartScreenView.swift */; };
+		FBCF1903CC7C45A009E81661 /* Pods_Studio_LamdaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6907892D954E607DA4DECACE /* Pods_Studio_LamdaTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A754DD80938E0ACA242BCBA /* Pods-Studio Lamda.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio Lamda.release.xcconfig"; path = "Target Support Files/Pods-Studio Lamda/Pods-Studio Lamda.release.xcconfig"; sourceTree = "<group>"; };
+		6907892D954E607DA4DECACE /* Pods_Studio_LamdaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studio_LamdaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F1F5C2D2597CA3100752B9F /* DetailPageBusinessInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPageBusinessInfo.swift; sourceTree = "<group>"; };
 		7F1FB658259BBBEC005AEA68 /* MessagingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagingViewController.swift; sourceTree = "<group>"; };
 		7F1FB664259BDC9D005AEA68 /* DetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewController.swift; sourceTree = "<group>"; };
@@ -79,10 +85,18 @@
 		7FD0855C2596AFD0001DF6A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FDCBEF925AAC74F00A01485 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		7FDCBF0125AB051700A01485 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		7FDCBF0625AB8E5C00A01485 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7FED24E525AA7CEB000C6C34 /* LoginStartScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStartScreenViewController.swift; sourceTree = "<group>"; };
 		7FED24EA25AA7D01000C6C34 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7FED24EF25AA7D15000C6C34 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		7FED24F625AA7D71000C6C34 /* LoginStartScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStartScreenView.swift; sourceTree = "<group>"; };
+		913EB6FF2C137A8777FE3927 /* Pods_Studio_Lamda_Studio_LamdaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studio_Lamda_Studio_LamdaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		93B18562F7204B6FE0CED2E4 /* Pods-Studio Lamda.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio Lamda.debug.xcconfig"; path = "Target Support Files/Pods-Studio Lamda/Pods-Studio Lamda.debug.xcconfig"; sourceTree = "<group>"; };
+		9D6F6AF9399104EC55E2E5C4 /* Pods-Studio LamdaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio LamdaTests.release.xcconfig"; path = "Target Support Files/Pods-Studio LamdaTests/Pods-Studio LamdaTests.release.xcconfig"; sourceTree = "<group>"; };
+		9FB03254AF8E8A045C47C943 /* Pods-Studio Lamda-Studio LamdaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio Lamda-Studio LamdaUITests.release.xcconfig"; path = "Target Support Files/Pods-Studio Lamda-Studio LamdaUITests/Pods-Studio Lamda-Studio LamdaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		AF19785CBD2E9E05A6118128 /* Pods_Studio_Lamda.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studio_Lamda.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B472651070A71DBBD61E921E /* Pods-Studio LamdaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio LamdaTests.debug.xcconfig"; path = "Target Support Files/Pods-Studio LamdaTests/Pods-Studio LamdaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BB029714618B1C95E2F847A5 /* Pods-Studio Lamda-Studio LamdaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio Lamda-Studio LamdaUITests.debug.xcconfig"; path = "Target Support Files/Pods-Studio Lamda-Studio LamdaUITests/Pods-Studio Lamda-Studio LamdaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E78368FC949680B55FC3320 /* Pods_Studio_Lamda.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBCF1903CC7C45A009E81661 /* Pods_Studio_LamdaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,12 +120,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3968A56CFBBA3C1436285C40 /* Pods_Studio_Lamda_Studio_LamdaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		72A3DA50CCD1D4AE1F8AC041 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				93B18562F7204B6FE0CED2E4 /* Pods-Studio Lamda.debug.xcconfig */,
+				4A754DD80938E0ACA242BCBA /* Pods-Studio Lamda.release.xcconfig */,
+				BB029714618B1C95E2F847A5 /* Pods-Studio Lamda-Studio LamdaUITests.debug.xcconfig */,
+				9FB03254AF8E8A045C47C943 /* Pods-Studio Lamda-Studio LamdaUITests.release.xcconfig */,
+				B472651070A71DBBD61E921E /* Pods-Studio LamdaTests.debug.xcconfig */,
+				9D6F6AF9399104EC55E2E5C4 /* Pods-Studio LamdaTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		7F1F5C322597CA8C00752B9F /* Detail Page View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +201,8 @@
 				7FD0854E2596AFD0001DF6A8 /* Studio LamdaTests */,
 				7FD085592596AFD0001DF6A8 /* Studio LamdaUITests */,
 				7FD085362596AFCC001DF6A8 /* Products */,
+				72A3DA50CCD1D4AE1F8AC041 /* Pods */,
+				E228C7224ADD05C3381F35C9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -196,6 +229,7 @@
 				7FD085412596AFD0001DF6A8 /* Assets.xcassets */,
 				7F251C6A259E799C000C124A /* videos */,
 				7FD085432596AFD0001DF6A8 /* LaunchScreen.storyboard */,
+				7FDCBF0625AB8E5C00A01485 /* GoogleService-Info.plist */,
 				7FD085462596AFD0001DF6A8 /* Info.plist */,
 				7F1FB65D259BBBF2005AEA68 /* MessagingViewController */,
 				7F1FB669259BE3B9005AEA68 /* Detail Image View   */,
@@ -268,6 +302,16 @@
 			path = LoginStartUIVew;
 			sourceTree = "<group>";
 		};
+		E228C7224ADD05C3381F35C9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AF19785CBD2E9E05A6118128 /* Pods_Studio_Lamda.framework */,
+				913EB6FF2C137A8777FE3927 /* Pods_Studio_Lamda_Studio_LamdaUITests.framework */,
+				6907892D954E607DA4DECACE /* Pods_Studio_LamdaTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -275,9 +319,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7FD0855F2596AFD0001DF6A8 /* Build configuration list for PBXNativeTarget "Studio Lamda" */;
 			buildPhases = (
+				0BD28F6832F96852E40DE0C7 /* [CP] Check Pods Manifest.lock */,
 				7FD085312596AFCC001DF6A8 /* Sources */,
 				7FD085322596AFCC001DF6A8 /* Frameworks */,
 				7FD085332596AFCC001DF6A8 /* Resources */,
+				AD80BDF9C239EBA147765267 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -292,6 +338,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7FD085622596AFD0001DF6A8 /* Build configuration list for PBXNativeTarget "Studio LamdaTests" */;
 			buildPhases = (
+				5340D48E843EFEEA124D6A14 /* [CP] Check Pods Manifest.lock */,
 				7FD085472596AFD0001DF6A8 /* Sources */,
 				7FD085482596AFD0001DF6A8 /* Frameworks */,
 				7FD085492596AFD0001DF6A8 /* Resources */,
@@ -310,9 +357,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7FD085652596AFD0001DF6A8 /* Build configuration list for PBXNativeTarget "Studio LamdaUITests" */;
 			buildPhases = (
+				54DE9638E2C9F9CDCAD3EA72 /* [CP] Check Pods Manifest.lock */,
 				7FD085522596AFD0001DF6A8 /* Sources */,
 				7FD085532596AFD0001DF6A8 /* Frameworks */,
 				7FD085542596AFD0001DF6A8 /* Resources */,
+				5564278D087FCB504D691D21 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -377,6 +426,7 @@
 				7FD085402596AFCC001DF6A8 /* Main.storyboard in Resources */,
 				7F251C64259E7984000C124A /* v3.mp4 in Resources */,
 				7F251C65259E7984000C124A /* v1.mp4 in Resources */,
+				7FDCBF0725AB8E5C00A01485 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +445,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0BD28F6832F96852E40DE0C7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Studio Lamda-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5340D48E843EFEEA124D6A14 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Studio LamdaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		54DE9638E2C9F9CDCAD3EA72 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Studio Lamda-Studio LamdaUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5564278D087FCB504D691D21 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Studio Lamda-Studio LamdaUITests/Pods-Studio Lamda-Studio LamdaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Studio Lamda-Studio LamdaUITests/Pods-Studio Lamda-Studio LamdaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Studio Lamda-Studio LamdaUITests/Pods-Studio Lamda-Studio LamdaUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AD80BDF9C239EBA147765267 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Studio Lamda/Pods-Studio Lamda-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Studio Lamda/Pods-Studio Lamda-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Studio Lamda/Pods-Studio Lamda-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7FD085312596AFCC001DF6A8 /* Sources */ = {
@@ -590,6 +743,7 @@
 		};
 		7FD085602596AFD0001DF6A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93B18562F7204B6FE0CED2E4 /* Pods-Studio Lamda.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -609,6 +763,7 @@
 		};
 		7FD085612596AFD0001DF6A8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A754DD80938E0ACA242BCBA /* Pods-Studio Lamda.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -628,6 +783,7 @@
 		};
 		7FD085632596AFD0001DF6A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B472651070A71DBBD61E921E /* Pods-Studio LamdaTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -650,6 +806,7 @@
 		};
 		7FD085642596AFD0001DF6A8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D6F6AF9399104EC55E2E5C4 /* Pods-Studio LamdaTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -672,6 +829,7 @@
 		};
 		7FD085662596AFD0001DF6A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB029714618B1C95E2F847A5 /* Pods-Studio Lamda-Studio LamdaUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -692,6 +850,7 @@
 		};
 		7FD085672596AFD0001DF6A8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FB03254AF8E8A045C47C943 /* Pods-Studio Lamda-Studio LamdaUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

@@ -1,0 +1,6 @@
+framework module Pods_Studio_Lamda_Studio_LamdaUITests {
+  umbrella header "Pods-Studio Lamda-Studio LamdaUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
