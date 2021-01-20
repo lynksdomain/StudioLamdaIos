@@ -55,28 +55,36 @@ class SignUpViewController: UIViewController {
     @objc func segueToMainScreen() {
         
         if signUpView.emailTF.text == "" || signUpView.passwordTF.text == "" {
-            alertUser()
+            alertUser(title: "Email Erro", message: "Make sure email is fillout properly")
             return
         }
         
         
-        guard let email = signUpView.emailTF.text, let password = signUpView.passwordTF.text else {
-            alertUser()
+        guard let email = signUpView.emailTF.text, let password = signUpView.passwordTF.text, let name = signUpView.nameTF.text, !email.isEmpty, !password.isEmpty, !name.isEmpty  else {
+            alertUser(title:"Forum Error", message: "Make sure everthing is filled out coorectly")
             return
                 }
         
-        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-            guard let result = user, error == nil else {
-                print("Error Creating User")
-                return
+        DatabaseManager.shared.isUserExists(with: email) { (exists) in
+            guard  !exists else {
+                //USER already exists
+                
+                 return
             }
             
-        
-            let user = result.user
-            
-            
-                    
+            Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, error) in
+                guard result != nil, error == nil else {
+                    print("Error Creating User")
+                    self?.alertUser(title: "User Error", message: "Error Creating User")
+                    return
+                }
+                let chatUser = ChatAppUser(firstName: name, lasttName: "Last", emailAddress: email)
+                DatabaseManager.shared.insertUser(user: chatUser)
+                let user = result?.user
+            }
         }
+        
+       
         
         
         dismiss(animated: true, completion: nil)
@@ -92,12 +100,7 @@ class SignUpViewController: UIViewController {
         signUpView.confirmPasswordTF.delegate = self
     }
     
-    func alertUser(){
-        let alert = UIAlertController(title: "Form Error", message: "Please make sure all inputs are correct", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-        
-        present(alert, animated: true)
-    }
+    
     
     func signUpViewConstraints() {
         view.addSubview(signUpView)

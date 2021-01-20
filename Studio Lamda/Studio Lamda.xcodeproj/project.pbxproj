@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -35,6 +35,8 @@
 		7FED24EB25AA7D01000C6C34 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FED24EA25AA7D01000C6C34 /* LoginViewController.swift */; };
 		7FED24F025AA7D15000C6C34 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FED24EF25AA7D15000C6C34 /* SignUpViewController.swift */; };
 		7FED24F725AA7D71000C6C34 /* LoginStartScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FED24F625AA7D71000C6C34 /* LoginStartScreenView.swift */; };
+		7FFA744925B768F400B9FD8B /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFA744825B768F400B9FD8B /* DataBaseManager.swift */; };
+		7FFA744E25B7A0D100B9FD8B /* UIAlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFA744D25B7A0D100B9FD8B /* UIAlertExtension.swift */; };
 		FBCF1903CC7C45A009E81661 /* Pods_Studio_LamdaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6907892D954E607DA4DECACE /* Pods_Studio_LamdaTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +92,8 @@
 		7FED24EA25AA7D01000C6C34 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7FED24EF25AA7D15000C6C34 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		7FED24F625AA7D71000C6C34 /* LoginStartScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStartScreenView.swift; sourceTree = "<group>"; };
+		7FFA744825B768F400B9FD8B /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
+		7FFA744D25B7A0D100B9FD8B /* UIAlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertExtension.swift; sourceTree = "<group>"; };
 		913EB6FF2C137A8777FE3927 /* Pods_Studio_Lamda_Studio_LamdaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studio_Lamda_Studio_LamdaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93B18562F7204B6FE0CED2E4 /* Pods-Studio Lamda.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio Lamda.debug.xcconfig"; path = "Target Support Files/Pods-Studio Lamda/Pods-Studio Lamda.debug.xcconfig"; sourceTree = "<group>"; };
 		9D6F6AF9399104EC55E2E5C4 /* Pods-Studio LamdaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio LamdaTests.release.xcconfig"; path = "Target Support Files/Pods-Studio LamdaTests/Pods-Studio LamdaTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -137,7 +141,6 @@
 				B472651070A71DBBD61E921E /* Pods-Studio LamdaTests.debug.xcconfig */,
 				9D6F6AF9399104EC55E2E5C4 /* Pods-Studio LamdaTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -219,9 +222,8 @@
 		7FD085372596AFCC001DF6A8 /* Studio Lamda */ = {
 			isa = PBXGroup;
 			children = (
+				7FFA744725B7689400B9FD8B /* Resources */,
 				7FED24E425AA7CCD000C6C34 /* Login Items */,
-				7FD085382596AFCC001DF6A8 /* AppDelegate.swift */,
-				7FD0853A2596AFCC001DF6A8 /* SceneDelegate.swift */,
 				7F1F5C322597CA8C00752B9F /* Detail Page View Controllers */,
 				7F251C50259D87E0000C124A /*  Detail Page CollectionViews */,
 				7F1F5C362597CA9D00752B9F /* Detail Page UiView */,
@@ -300,6 +302,17 @@
 				7FED24F625AA7D71000C6C34 /* LoginStartScreenView.swift */,
 			);
 			path = LoginStartUIVew;
+			sourceTree = "<group>";
+		};
+		7FFA744725B7689400B9FD8B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7FD0853A2596AFCC001DF6A8 /* SceneDelegate.swift */,
+				7FD085382596AFCC001DF6A8 /* AppDelegate.swift */,
+				7FFA744825B768F400B9FD8B /* DataBaseManager.swift */,
+				7FFA744D25B7A0D100B9FD8B /* UIAlertExtension.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		E228C7224ADD05C3381F35C9 /* Frameworks */ = {
@@ -563,7 +576,9 @@
 				7FD0853B2596AFCC001DF6A8 /* SceneDelegate.swift in Sources */,
 				7F1FB66E259BE3DE005AEA68 /* DetialImageUIView.swift in Sources */,
 				7FED24F025AA7D15000C6C34 /* SignUpViewController.swift in Sources */,
+				7FFA744E25B7A0D100B9FD8B /* UIAlertExtension.swift in Sources */,
 				7F1FB665259BDC9D005AEA68 /* DetailImageViewController.swift in Sources */,
+				7FFA744925B768F400B9FD8B /* DataBaseManager.swift in Sources */,
 				7FDCBF0225AB051700A01485 /* LoginView.swift in Sources */,
 				7FED24F725AA7D71000C6C34 /* LoginStartScreenView.swift in Sources */,
 				7F1FB659259BBBEC005AEA68 /* MessagingViewController.swift in Sources */,

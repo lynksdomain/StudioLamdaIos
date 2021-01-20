@@ -27,22 +27,23 @@ class LoginViewController: UIViewController {
         
         guard let email = loginView.emailTF.text, let password = loginView.passwordTF.text, !email.isEmpty, !password.isEmpty, password.count >= 6 else {
             print("Error logging in user")
+            self.alertUser(title: "Error", message: "Can't be blank")
             return
         }
         
-        Firebase.Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+        Firebase.Auth.auth().signIn(withEmail: email, password: password) { [self] (user, error) in
             guard let result = user, error == nil else {
-                print("Error can't find user")
+                alertUser(title: "Login error", message: "Email or Password might be Incorrect")
                 return
             }
             
+            self.dismiss(animated: true, completion: nil)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let mainScreen = storyboard.instantiateViewController(withIdentifier: "mainScreen")
+            self.navigationController?.pushViewController(mainScreen, animated: true)
             let user = result.user
         }
         
-        dismiss(animated: true, completion: nil)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainScreen = storyboard.instantiateViewController(withIdentifier: "mainScreen")
-        self.navigationController?.pushViewController(mainScreen, animated: true)
     }
 
     @objc func loginSegue(){
@@ -59,6 +60,5 @@ class LoginViewController: UIViewController {
         loginView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         loginView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
-  
-
+    
 }

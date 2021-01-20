@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -17,9 +18,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         self.window = UIWindow(windowScene: windowScene)
         
-        let rootVC = UINavigationController(rootViewController: LoginStartScreenViewController())
-        window?.rootViewController = rootVC
-        window?.makeKeyAndVisible()
+       if FirebaseAuth.Auth.auth().currentUser == nil {
+            let rootVC = UINavigationController(rootViewController: LoginStartScreenViewController())
+            window?.rootViewController = rootVC
+            window?.makeKeyAndVisible()
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let mainScreen = storyboard.instantiateViewController(withIdentifier: "mainScreen")
+            window?.rootViewController = mainScreen
+            window?.makeKeyAndVisible()
+        }
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
