@@ -8,10 +8,9 @@
 import UIKit
 import MapKit
 
-class DetailPageViewController: UIViewController,MKMapViewDelegate {
+class DetailPageViewController: UIViewController,MKMapViewDelegate, SegmentedProgressBarDelegate {
     
-    
-    let detailView = DetialImageUIView()
+    private var spb: SegmentedProgressBar!
     
     var markerPosition : CGPoint!
     
@@ -19,11 +18,8 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
     
     let mapView = MKMapView()
     
-    let imageArray = [UIImage.init(named: "photo1"),
-                      UIImage.init(named: "photo2"),
-                      UIImage.init(named: "photo3"),
-                      UIImage.init(named: "photo4"),
-                      UIImage.init(named: "photo5")]
+    let imageArray = clientModel.clientModelArray
+
     
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     lazy var scrollView: UIScrollView = {
@@ -34,6 +30,7 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
     lazy var containerView: UIView = {
         let v = UIView()
         v.backgroundColor = .white
@@ -43,20 +40,7 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        detailView.isHidden = true
-        
-        if traitCollection.forceTouchCapability == .available {
-            UIContextMenuInteraction.self
-        }
-        
-        if( traitCollection.forceTouchCapability == .available){
-            
-            registerForPreviewing(with: self, sourceView: view)
-            
-        }
-        
-//        navigationController?.navigationBar.prefersLargeTitles = true
+
         let icon = UIImage(systemName: "message")
         let iconSize = CGRect(origin: CGPoint.zero, size: CGSize(width: 20, height: 20))
         let iconButton = UIButton(frame: iconSize)
@@ -65,14 +49,9 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
         iconButton.addTarget(self, action: #selector(navigateToMessaging), for: .touchUpInside)
         
         navigationItem.rightBarButtonItem = barButton
-//        navigationItem.title = "Your Project"
+
+        segmentedProgressBarSetup()
         
-        //        let flowLayout = UICollectionViewFlowLayout()
-        //        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "collectionCell")
-        //        collectionView.delegate = self
-        //        collectionView.dataSource = self
-        //        collectionView.backgroundColor = UIColor.cyan
-        //
         mapView.isOpaque = true
         mapView.isZoomEnabled = false
         mapView.isScrollEnabled = false
@@ -98,8 +77,21 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
         scrollView.addSubview(containerView)
         setupContainer(containerView)
 
-        
     }
+    
+    func segmentedProgressBarSetup(){
+        spb = SegmentedProgressBar(numberOfSegments: 7, stopPoint: 4, duration: 0)
+
+        spb.frame = CGRect(x: 20, y:10, width: view.frame.width - 80, height: 5)
+        containerView.addSubview(spb)
+
+                spb.delegate = self
+                spb.topColor = UIColor.blue
+                spb.bottomColor = UIColor.gray.withAlphaComponent(0.25)
+                spb.padding = 2
+                spb.startAnimation()
+    }
+    
     
     public func setupContainer(_ container: UIView) {
         detailPageLayout()
@@ -131,22 +123,11 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        //            let leftMargin:CGFloat = 0
-        //            let topMargin:CGFloat = view.safeAreaLayoutGuide += 10
-        //            let mapWidth:CGFloat = view.frame.size.width
-        //            let mapHeight:CGFloat = 250
-        
-        //        mapView.frame = CGRect(x: leftMargin, y: view.safeAreaLayoutGuide.topAnchor.coon, width: mapWidth, height: mapHeight)
-        
+
         mapView.mapType = MKMapType.standard
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
-        //
-        
-        
-        
-        
+
     }
     
     
@@ -160,40 +141,48 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
     
     
     func detailPageLayout(){
-        scrollView.addSubview(detailView)
-        
-        detailView.translatesAutoresizingMaskIntoConstraints = false
-        
-        detailView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor, constant: 0).isActive = true
-        detailView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor, constant: 0).isActive = true
-        
-        detailView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 10).isActive = true
-        detailView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -10).isActive = true
-        detailView.heightAnchor.constraint(equalTo: self.containerView.heightAnchor, multiplier:  0.5).isActive = true
-        
-        
-        
         mapViewLayoutContraints()
         projectTitleLabelLayoutContraints()
+        locationTitleLabelLayoutContraints()
+        progressTitleLabelLayoutContraints()
+        progressBarLayoutContraints()
         stackLayoutContraints()
-//        projectCapacityLabelLayoutContraints()
-//        estimateTimeLayoutContraints()
+        buttonStackLayoutContraints()
         galleryLayoutContraints()
         collectionViewLayoutContraints()
-        
-        
-        
     }
        
+    override var prefersStatusBarHidden: Bool {
+            return true
+        }
+
+        func segmentedProgressBarChangedIndex(index: Int) {
+            print("Now showing index: \(index)")
+            
+        }
+        
+        func segmentedProgressBarFinished() {
+            print("Finished!")
+        }
+        
+        @objc private func tappedView() {
+            spb.isPaused = !spb.isPaused
+        }
+        
+        private func updateImage(index: Int) {
+            
+        }
+    
     lazy var collectionView: UICollectionView = {
         var flowlayout = UICollectionViewFlowLayout()
         var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowlayout)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "collectionCell")
+        collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "collectionCell")
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .white
         return collectionView
     }()
+    
     
     lazy var projectTitleLabel: UILabel = {
         var label = UILabel()
@@ -204,16 +193,24 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
         return label
     }()
     
-//    lazy var projectTitleLabel: UILabel = {
-//        var label = UILabel()
-//        label.text = "Gino's Restaurant"
-//        label.textAlignment = .left
-//        label.font = UIFont(name: "HelveticaNeue-Medium", size: 28) //Montserrat
-//        label.font = UIFont.boldSystemFont(ofSize: 28.0)
-//        return label
-//    }()
+    lazy var locationTitleLabel: UILabel = {
+        var label = UILabel()
+        label.text = "Samborodon, Ecuador"
+        label.textAlignment = .left
+        label.font = UIFont(name: "HelveticaNeue-Medium", size: 18) //Montserrat
+        label.font = UIFont.boldSystemFont(ofSize: 18.0)
+        return label
+    }()
     
-    
+    lazy var progressTitleLabel: UILabel = {
+        var label = UILabel()
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.font = UIFont(descriptor: UIFontDescriptor(name: "HelveticaNeue-Light", size: 8), size: 18)
+        label.text = "Your Progress"
+        label.textColor = .darkGray
+        return label
+    }()
 
     lazy var dimensionLabel: UILabel = {
         var label = UILabel()
@@ -238,9 +235,6 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
     lazy var dimensionstackView: UIStackView = {
         var stack = UIStackView()
         stack.axis = NSLayoutConstraint.Axis.vertical
-//        stack.distribution = UIStackView.Distribution.equalSpacing
-//        stack.alignment = UIStackView.Alignment.center
-//        stack.spacing = 5
         return stack
     }()
 
@@ -268,9 +262,6 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
     lazy var datestackView: UIStackView = {
         var stack = UIStackView()
         stack.axis = NSLayoutConstraint.Axis.vertical
-//        stack.distribution = UIStackView.Distribution.equalSpacing
-//        stack.alignment = UIStackView.Alignment.center
-//        stack.spacing = 5
         return stack
     }()
     
@@ -278,9 +269,36 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
     lazy var stackView: UIStackView = {
         var stack = UIStackView()
         stack.axis = NSLayoutConstraint.Axis.horizontal
-//        stack.distribution = UIStackView.Distribution.equalSpacing
-//        stack.alignment = UIStackView.Alignment.center
-        stack.spacing = 140
+        stack.spacing = 100
+        return stack
+    }()
+    
+    lazy var appointmentButton: UIButton = {
+        var button = UIButton()
+        button.setTitle("Appointment", for: .normal)
+        button.layer.cornerRadius = 10
+        button.backgroundColor = .blue
+        button.clipsToBounds = true
+        button.tintColor = .white
+        return button
+    }()
+    
+    lazy var detailButton: UIButton = {
+        var button = UIButton()
+        button.setTitle("Details", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        button.layer.borderColor = UIColor.blue.cgColor
+        button.layer.borderWidth = 1
+        return button
+    }()
+    
+    lazy var buttonStackView: UIStackView = {
+        var stack = UIStackView()
+        stack.axis = NSLayoutConstraint.Axis.horizontal
+        stack.spacing = 20
+        stack.distribution = .fillEqually
         return stack
     }()
     
@@ -308,12 +326,39 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
     
     
     func projectTitleLabelLayoutContraints() {
-        view.addSubview(projectTitleLabel)
+        containerView.addSubview(projectTitleLabel)
         projectTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         projectTitleLabel.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: 5).isActive = true
         projectTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         projectTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
     }
+    
+    func locationTitleLabelLayoutContraints() {
+        containerView.addSubview(locationTitleLabel)
+        locationTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        locationTitleLabel.topAnchor.constraint(equalTo: projectTitleLabel.bottomAnchor, constant: 5).isActive = true
+        locationTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        locationTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+    }
+    
+    func progressTitleLabelLayoutContraints() {
+        containerView.addSubview(progressTitleLabel)
+        progressTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        progressTitleLabel.topAnchor.constraint(equalTo: locationTitleLabel.bottomAnchor, constant: 15).isActive = true
+        progressTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        progressTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+    }
+    
+    func progressBarLayoutContraints() {
+        containerView.addSubview(spb)
+        spb.translatesAutoresizingMaskIntoConstraints = false
+        spb.topAnchor.constraint(equalTo: progressTitleLabel.bottomAnchor, constant: 10).isActive = true
+        spb.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        spb.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        spb.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.02).isActive = true
+
+    }
+    
     
     
     func stackLayoutContraints() {
@@ -327,37 +372,31 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
         
         dimensionstackView.addArrangedSubview(dimensionLabel)
         dimensionstackView.addArrangedSubview(dimensionInfoLabel)
-//        dimensionstackView.addSubview(dimensionLabel)
-//        dimensionstackView.addSubview(dimensionInfoLabel)
-//
-//        dimensionstackView.addArrangedSubview(dimensionLabel)
-//        dimensionstackView.addArrangedSubview(dimensionInfoLabel)
         
         datestackView.addArrangedSubview(timeLabel)
         datestackView.addArrangedSubview(timeinfoLabel)
         
         
-        stackView.topAnchor.constraint(equalTo: projectTitleLabel.bottomAnchor, constant: 18).isActive = true
+        stackView.topAnchor.constraint(equalTo: spb.bottomAnchor, constant: 5).isActive = true
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
     }
     
-//    func estimateTimeLayoutContraints() {
-//        containerView.addSubview(estimateTimeLabel)
-//
-//
-//        estimateTimeLabel.topAnchor.constraint(equalTo: projectCapacityLabel.bottomAnchor, constant: 5).isActive = true
-//        estimateTimeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
-//        estimateTimeLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 10).isActive = true
-//    }
-
+    
+    func buttonStackLayoutContraints() {
+        containerView.addSubview(buttonStackView)
+        buttonStackView.addArrangedSubview(appointmentButton)
+        buttonStackView.addArrangedSubview(detailButton)
+        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
+        buttonStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20).isActive = true
+        buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+    }
     
     func galleryLayoutContraints() {
         containerView.addSubview(gallerytitleLabel)
-        
         gallerytitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        gallerytitleLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30).isActive = true
+        gallerytitleLabel.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 30).isActive = true
         gallerytitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         gallerytitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
     }
@@ -375,19 +414,23 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate {
 
 extension DetailPageViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
-    {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imageArray.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-    {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath as IndexPath)
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: cell.frame.width, height: cell.frame.height))
-        cell.contentView.addSubview(imageView)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as? ImageCollectionViewCell else {return UICollectionViewCell()}
+      
         let imagearray = imageArray[indexPath.row]
-        imageView.image = imagearray
-        //        cell.backgroundColor = UIColor.green
+        
+        if imagearray.isVideo {
+            
+        cell.imageView.image = UIImage(named: imagearray.imageName)
+        cell.playImageView.image = UIImage(named: "playButton")
+
+        } else {
+        cell.imageView.image = UIImage(named: imagearray.imageName)
+        }
         return cell
     }
     
@@ -407,40 +450,11 @@ extension DetailPageViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let destVC = storyboard.instantiateViewController(withIdentifier: "DetailVC")
-        //                    (destVC as? DetailImageViewController)?.imgData = self.images[indexPath.item]
-        //        destVC.preferredContentSize = CGSize(width: 100, height: 200)
-        //        destVC.modalPresentationStyle = .overCurrentContext
-        //        navigationController?.isModalInPresentation = true
-        //        navigationController?.present(destVC, animated: true, completion: nil)
-        detailView.isHidden = false
-        
-        //        self.present(destVC, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let imageVC = storyboard.instantiateViewController(withIdentifier: "ImageViewController") as! DetailImageViewController
+        imageVC.toIndexPath = indexPath
+        self.navigationController?.pushViewController(imageVC, animated: true)
     }
 }
 
 
-extension DetailPageViewController: UIViewControllerPreviewingDelegate {
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        let selectedIndexPath = collectionView.indexPathForItem(at: location)
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let destVC = storyboard.instantiateViewController(withIdentifier: "PreviewVC")
-        destVC.preferredContentSize = CGSize.init(width: view.frame.size.width, height: view.frame.size.height)
-        //            peekedData = images[selectedIndexPath?.row ?? 0]
-        //            (destVC as? PreviewVC)?.imgData = peekedData
-        navigationController?.pushViewController(destVC, animated: true)
-        return destVC
-    }
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let destVC = storyboard.instantiateViewController(withIdentifier: "DetailVC")
-        //                (destVC as? DetailVC)?.imgData = peekedData
-        show(destVC, sender: self)
-    }
-    
-    
-    
-}
