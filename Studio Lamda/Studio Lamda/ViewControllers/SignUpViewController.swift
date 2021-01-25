@@ -54,35 +54,35 @@ class SignUpViewController: UIViewController {
             return
                 }
         
-        DatabaseManager.shared.isUserExists(with: email) { (exists) in
-            guard  !exists else {
-                //USER already exists
-                
-                 return
-            }
-            
-            Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, error) in
-                guard result != nil, error == nil else {
-                    print("Error Creating User")
-                    self?.alertUser(title: "User Error", message: "Error Creating User")
-                    return
-                }
-                self!.spinner.show(in: self!.view)
-
-                            
-                let initialProgressBarUpdater = 0
-                
-                let chatUser = ChatAppUser(fullName: name, emailAddress: email, progressBarUpdater: initialProgressBarUpdater)
-                DatabaseManager.shared.insertUser(user: chatUser)
-                let user = result?.user
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
-
-                self!.spinner.indicatorView = JGProgressHUDSuccessIndicatorView()
-                }
-
-            }
-        }
+//        DatabaseManager.shared.isUserExists(with: email) { (exists) in
+//            guard  !exists else {
+//                //USER already exists
+//                
+//                 return
+//            }
+//            
+//            Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, error) in
+//                guard result != nil, error == nil else {
+//                    print("Error Creating User")
+//                    self?.alertUser(title: "User Error", message: "Error Creating User")
+//                    return
+//                }
+//                self!.spinner.show(in: self!.view)
+//
+//                            
+//                let initialProgressBarUpdater = 0
+//                
+//                let chatUser = ChatAppUser(fullName: name, emailAddress: email, progressBarUpdater: initialProgressBarUpdater)
+//                DatabaseManager.shared.insertUser(user: chatUser)
+//                let user = result?.user
+//                
+//                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+//
+//                self!.spinner.indicatorView = JGProgressHUDSuccessIndicatorView()
+//                }
+//
+//            }
+//        }
         
        
         spinner.dismiss()
