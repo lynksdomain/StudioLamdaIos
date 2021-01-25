@@ -7,19 +7,22 @@
 
 import UIKit
 import Firebase
+import JGProgressHUD
 
 class LoginViewController: UIViewController {
 
     let loginView = LoginView()
+    private let spinner = JGProgressHUD(style: .dark)
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
         signUpViewConstraints()
         loginView.alreadyHaveButton.addTarget(self, action: #selector(loginSegue), for: .touchUpInside)
+        
         loginView.loginButton.addTarget(self, action: #selector(segueToMainScreen), for: .touchUpInside)
+        spinner.textLabel.text = "Logging In"
     }
     
     
@@ -37,17 +40,22 @@ class LoginViewController: UIViewController {
                 return
             }
             
+            self.spinner.show(in: self.view)
+
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+
             self.dismiss(animated: true, completion: nil)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mainScreen = storyboard.instantiateViewController(withIdentifier: "mainScreen")
             self.navigationController?.pushViewController(mainScreen, animated: true)
             let user = result.user
+            }
         }
         
     }
 
     @objc func loginSegue(){
-        dismiss(animated: true, completion: nil)
         let signupVC = SignUpViewController()
         navigationController?.pushViewController(signupVC, animated: true)
     }

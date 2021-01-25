@@ -7,10 +7,15 @@
 
 import UIKit
 import Firebase
+import JGProgressHUD
 
 class SignUpViewController: UIViewController {
 
     let signUpView = SignUpView()
+    
+    private let spinner = JGProgressHUD(style: .dark)
+    
+    
     
 //    var ref: DatabaseReference!
 
@@ -26,36 +31,20 @@ class SignUpViewController: UIViewController {
         signUpViewConstraints()
         signUpView.alreadyHaveButton.addTarget(self, action: #selector(loginSegue), for: .touchUpInside)
         signUpView.createButton.addTarget(self, action: #selector(segueToMainScreen), for: .touchUpInside)
+        spinner.textLabel.text = "Creating Account"
+
     }
     
     @objc func loginSegue(){
-        
-//        guard let email = signUpView.emailTF.text,let password = signUpView.passwordTF.text else {
-//            print("Form not Valid")
-//            return
-//        }
-//
-//        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-//            if error != nil {
-//                print(error)
-//                return
-//            }
-//
-//            ref = Database.database().ref
-
-            
-//        }
-        
-        
-        dismiss(animated: true, completion: nil)
         let loginVC = LoginViewController()
         navigationController?.pushViewController(loginVC, animated: true)
     }
 
+    
     @objc func segueToMainScreen() {
-        
+
         if signUpView.emailTF.text == "" || signUpView.passwordTF.text == "" {
-            alertUser(title: "Email Erro", message: "Make sure email is fillout properly")
+            alertUser(title: "Email Error", message: "Make sure email is fillout properly")
             return
         }
         
@@ -78,19 +67,33 @@ class SignUpViewController: UIViewController {
                     self?.alertUser(title: "User Error", message: "Error Creating User")
                     return
                 }
-                let chatUser = ChatAppUser(firstName: name, lasttName: "Last", emailAddress: email)
+                self!.spinner.show(in: self!.view)
+
+                            
+                let initialProgressBarUpdater = 0
+                
+                let chatUser = ChatAppUser(fullName: name, emailAddress: email, progressBarUpdater: initialProgressBarUpdater)
                 DatabaseManager.shared.insertUser(user: chatUser)
                 let user = result?.user
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+
+                self!.spinner.indicatorView = JGProgressHUDSuccessIndicatorView()
+                }
+
             }
         }
         
        
+        spinner.dismiss()
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
         
-        dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainScreen = storyboard.instantiateViewController(withIdentifier: "mainScreen")
         self.navigationController?.pushViewController(mainScreen, animated: true)
+        }
     }
     
     func textFieldDelegates(){

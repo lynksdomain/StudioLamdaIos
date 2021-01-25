@@ -34,17 +34,17 @@ extension DatabaseManager {
     
     public func insertUser(user: ChatAppUser){
         database.child(user.safeEmail).setValue([
-                                                    "first_Name":user.firstName,
-                                                    "last_Name":user.lasttName
+                                                    "full_Name":user.fullName,
+                                                    "progressBar_Updater": user.progressBarUpdater,
         ])
     }
 }
 
 
 struct  ChatAppUser {
-    let firstName: String
-    let lasttName: String
+    let fullName: String
     let emailAddress: String
+    let progressBarUpdater: Int
     var safeEmail : String {
         var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "-")
         safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")

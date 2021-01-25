@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import FirebaseAuth
 
 class DetailPageViewController: UIViewController,MKMapViewDelegate, SegmentedProgressBarDelegate {
     
@@ -48,7 +49,11 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate, SegmentedPro
         let barButton = UIBarButtonItem(customView: iconButton)
         iconButton.addTarget(self, action: #selector(navigateToMessaging), for: .touchUpInside)
         
+        
+        let signoutBarButton = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signout))
+        
         navigationItem.rightBarButtonItem = barButton
+        navigationItem.leftBarButtonItem = signoutBarButton
 
         segmentedProgressBarSetup()
         
@@ -95,6 +100,20 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate, SegmentedPro
     
     public func setupContainer(_ container: UIView) {
         detailPageLayout()
+    }
+    
+    
+    @objc func signout(){
+        do {
+            try FirebaseAuth.Auth.auth().signOut()
+            
+            let vc = LoginStartScreenViewController()
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
+        } catch {
+            fatalError("Error signing out")
+        }
     }
     
     @objc func navigateToMessaging() {
@@ -157,12 +176,12 @@ class DetailPageViewController: UIViewController,MKMapViewDelegate, SegmentedPro
         }
 
         func segmentedProgressBarChangedIndex(index: Int) {
-            print("Now showing index: \(index)")
+//            print("Now showing index: \(index)")
             
         }
         
         func segmentedProgressBarFinished() {
-            print("Finished!")
+//            print("Finished!")
         }
         
         @objc private func tappedView() {
